@@ -15,14 +15,9 @@
                     @endif
 
 
-                        {{--  @auth
-
-
-
+                    {{--  @auth
                         @endauth
-
                         @guest
-
                         @endguest  --}}
 
                         {{--  {{ dd(auth()->user()) }}  --}}
