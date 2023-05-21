@@ -24,8 +24,8 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home')->midd
 Route::resource('/post', 'App\Http\Controllers\PostController')->middleware('auth');
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
-Route::namespace('Admin')->prefix('admin')->group(function () {
-      Route::get('/', 'Admin\Http\Controllers\HomeController@index')->middleware('auth')->name('admin.home');
+Route::prefix('admin')->group(function () {
+      Route::get('/', ' App\Http\Controllers\Admin\HomeController@index')->middleware('auth')->name('admin.home');
       Route::namespace('Auth')->group(function () {
             Route::get('/login', 'App\Http\Admin\Auth\LoginController@showLoginForm')
                   ->name('admin.login');
