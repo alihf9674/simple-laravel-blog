@@ -25,11 +25,11 @@ Route::resource('/post', 'App\Http\Controllers\PostController')->middleware('aut
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
-      Route::get('/', ' App\Http\Controllers\Admin\HomeController@index')->middleware('auth')->name('admin.home');
-      Route::namespace('Auth')->group(function () {
-            Route::get('/login', 'App\Http\Admin\Auth\LoginController@showLoginForm')
+      Route::get('/', '\HomeController@index')->middleware('auth')->name('admin.home');
+      Route::namespace('App\Http\Controllers\Admin\Auth')->group(function () {
+            Route::get('/login', 'LoginController@showLoginForm')
                   ->name('admin.login');
-            Route::post('logout', 'App\Http\Admin\Auth\LoginController@logout')
+            Route::post('logout', 'LoginController@logout')
                   ->name('admin.logout');
       });
 });
