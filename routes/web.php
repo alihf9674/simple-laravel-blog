@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes();
-Route::get('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
+Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -25,11 +25,12 @@ Route::resource('/post', 'App\Http\Controllers\PostController')->middleware('aut
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
-      Route::get('/', '\HomeController@index')->middleware('auth')->name('admin.home');
+      Route::get('/', 'App\Http\Controllers\Admin\HomeController@index')->middleware('auth')->name('admin.home');
       Route::namespace('App\Http\Controllers\Admin\Auth')->group(function () {
             Route::get('/login', 'LoginController@showLoginForm')
                   ->name('admin.login');
             Route::post('logout', 'LoginController@logout')
                   ->name('admin.logout');
+            Route::post('/login', 'LoginController@login');
       });
 });
