@@ -19,7 +19,7 @@ Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 // Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware('auth', 'admin');
 Route::resource('/post', 'App\Http\Controllers\PostController')->middleware('auth');
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
