@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->bigInteger('user_id')->unsigned()->index();
             $table->text('title')->collation('utf8_general_ci')->nullable();
+            $table->text('image')->collation('utf8mb4_unicode_ci');
+            $table->text('pdf')->collation('utf8mb4_unicode_ci')->nullable()->useCurrentOnUpdate();
             $table->timestamp('started_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
 

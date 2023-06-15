@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,7 +40,15 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        Post::create($request->all());
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $pdf = Storage::putFileAs('pdf', $request->file('pdf'), time().'.'.$request->file('pdf')->getClientOriginalName());
+         Post::create([
+             'title' => $request->title,
+             'user_id' => $request->user_id,
+             'image' => 'images/'.$imageName,
+             'pdf' => $pdf
+         ]);
         return redirect()->route('post.index')->with('success', 'record created successfully');
     }
 
@@ -51,6 +60,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        if($post->pdf != null)
+        return Storage::download($post->pdf);
         return view('post.show', compact('post'));
     }
 
